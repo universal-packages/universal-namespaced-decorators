@@ -4,7 +4,7 @@
 [![Testing](https://github.com/universal-packages/universal-namespaced-decorators/actions/workflows/testing.yml/badge.svg)](https://github.com/universal-packages/universal-namespaced-decorators/actions/workflows/testing.yml)
 [![codecov](https://codecov.io/gh/universal-packages/universal-namespaced-decorators/branch/main/graph/badge.svg?token=CXPJSN8IGL)](https://codecov.io/gh/universal-packages/universal-namespaced-decorators)
 
-Easly track and decide wihch and how decorators will transform your classes. [Decorators](https://github.com/tc39/proposal-decorators) are still in stage: 3, so they are experimental either in [Typescript](https://www.typescriptlang.org/docs/handbook/decorators.html) and [Babel](https://babeljs.io/docs/en/babel-plugin-proposal-decorators).
+Easily track and decide which and how decorators will transform your classes. [Decorators](https://github.com/tc39/proposal-decorators) are still in stage: 3, so they are experimental either in [Typescript](https://www.typescriptlang.org/docs/handbook/decorators.html) and [Babel](https://babeljs.io/docs/en/babel-plugin-proposal-decorators).
 
 ## Install
 
@@ -14,9 +14,9 @@ npm install @universal-packages/namespaced-decorators
 
 ## Decorators
 
-The base decorators are meant to be used to register decorations in a certain namespace, with a single decoration object to be passed to whoever is going to finally decorate the class dependeng on what is in that decoration object.
+The base decorators are meant to be used to register decorations in a certain namespace, with a single decoration object to be passed to whoever is going to finally decorate the class depending on what is in that decoration object.
 
-You should't use these base decorators directly in your classes instead you create new decorator function that take your custom arguments to be collected into a decoration object.
+You shouldn't use these base decorators directly in your classes, instead you create a new decorator function that takes your custom arguments to be collected into a decoration object.
 
 All decorators take a namespace as first argument to be grouped accordingly, and a decoration object with a required `__type` property useful to know what to do with the decorated element.
 
@@ -29,7 +29,7 @@ All decorators take a namespace as first argument to be grouped accordingly, and
 - **`ArgumentDecorator`**
   Registers a method's argument decoration
 - **`PropertyDecorator`**
-  Registers a property decoration, it also takes a thrid argument, a `DescriptorGenerator` which is a function that returns a descriptor to describe the property, usefull to make properties readonly and that's about it.
+  Registers a property decoration, it also takes a third argument, a `DescriptorGenerator` which is a function that returns a descriptor to describe the property, useful to make properties read only.
 
 ### Usage
 
@@ -77,7 +77,7 @@ export default class ApplicationController {
 
 ## getNamespace()
 
-Get the namespaced decorators registry as a usefull structured decorations object. You can optionally pass load options object, all modulesin in that location will be dynamically imported triggering the decorators.
+Get the namespaced decorators registry as a useful structured decorations object. You can optionally pass load options objects, all modules in that location will be dynamically imported triggering the decorators.
 
 > In order to get the location of a decorated class all imported modules should have that class as a default export.
 
@@ -94,41 +94,41 @@ The namespace registry is structured as follow:
 - **`name`** `String`
   The name of the namespace
 - **`classes`** `ClassRegistry[]`
-  An array of all classes decorated in order of activation. The class registry is structired as follow:
+  An array of all classes decorated in order of activation. The class registry is structured as follow:
   - **`name`** `String`
     The name of the class
   - **`decorations`** `Decoration[]`
-    All the decorations being applied to the class in order of activation.
+    All the decorations are being applied to the class in order of activation.
   - **`location`** `String`
     If a loading location object is provided when getting a namespace this property will be populated with the class src file path.
   - **`target`** `ClassType`
-    The actuall reference to the decorated class.
+    The actual reference to the decorated class.
   - **`accessors`** `AccessorRegistry[]`
-    An array of all the decorated accessors in this class. The Accessor Registry is structired as follow:
+    An array of all the decorated accessors in this class. The Accessor Registry is structured as follow:
     - **`propertyKey`** `String`
       The accessor name
     - **`decorations`** `Decoration[]`
       All the decorations being applied to the accessor in order of activation.
   - **`methods`** `MethodRegistry[]`
-    An array of all the decorated methods in this class. The Method Registry is structired as follow:
+    An array of all the decorated methods in this class. The Method Registry is structured as follow:
     - **`propertyKey`** `String`
       The accessor name
     - **`decorations`** `Decoration[]`
       All the decorations being applied to the method in order of activation.
     - **`arguments`** `ArgumentRegistry[]`
-      An array of all the decorated arguments in this method. The Argument Registry is structired as follow:
+      An array of all the decorated arguments in this method. The Argument Registry is structured as follow:
       - **`index`** `number`
-        The indes of the mathod argument from left to right.
+        The index of the method argument from left to right.
       - **`decorations`** `Decoration[]`
         All the decorations being applied to the argument in order of activation.
   - **`properties`** `PropertyRegistry[]`
-    An array of all the decorated properties in this class. The Property Registry is structired as follow:
+    An array of all the decorated properties in this class. The Property Registry is structured as follow:
     - **`propertyKey`** `String`
       The accessor name
     - **`decorations`** `Decoration[]`
       All the decorations being applied to the property in order of activation.
 
-#### How it looks?
+#### How does it look?
 
 ```js
 const namespace = {
