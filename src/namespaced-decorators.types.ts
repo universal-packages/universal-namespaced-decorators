@@ -1,3 +1,5 @@
+import { ModuleRegistry } from '@universal-packages/module-loader'
+
 export type ClassType<T = any> = { new (...args: any[]): T; [key: string]: any }
 export type AccessorDecoratorFunction = (target: any, propertyKey: string, desciptor: PropertyDescriptor) => PropertyDescriptor
 export type ClassDecoratorFunction = (constructor: ClassType) => void
@@ -5,11 +7,6 @@ export type MethodDecoratorFunction = (target: any, propertyKey: string, descipt
 export type ParameterDecoratorFunction = (target: any, propertyKey: string, index: number) => void
 export type PropertyDecoratorFunction = (target: any, propertyKey: string) => void
 export type DescriptorGenerator = (propertyKey: string) => PropertyDescriptor
-
-export interface GetNamespaceOptions {
-  location: string
-  conventionPrefix?: string
-}
 
 export interface Decoration {
   __type: string
@@ -19,6 +16,7 @@ export interface Decoration {
 export interface NamespaceRegistry {
   name: string
   classes: ClassRegistry[]
+  importedModules: ModuleRegistry[]
 }
 
 export interface ClassRegistry {

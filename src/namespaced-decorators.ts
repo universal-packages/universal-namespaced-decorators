@@ -12,20 +12,20 @@ import {
   AccessorRegistry,
   MethodRegistry,
   PropertyRegistry,
-  ArgumentRegistry,
-  GetNamespaceOptions
+  ArgumentRegistry
 } from './namespaced-decorators.types'
 
 const namespaceRegistries: { [name: string]: NamespaceRegistry } = {}
-const importedModules: ModuleRegistry[] = []
 
-export async function getNamespace(namespace: string, options?: GetNamespaceOptions): Promise<NamespaceRegistry> {
-  if (options?.location) importedModules.push(...(await loadModules(options.location, { conventionPrefix: options.conventionPrefix })))
+export async function getNamespace(namespace: string, location: string, conventionPrefix?: string): Promise<NamespaceRegistry> {
+  const importedModules = await loadModules(location, { conventionPrefix })
 
   const namespaceRecord = namespaceRegistries[namespace]
 
+  namespaceRecord.importedModules = importedModules
+
   if (namespaceRecord) {
-    setClassRecordsLocation(namespaceRecord)
+    setClassRecordsLocation(namespaceRecord, importedModules)
   }
 
   return namespaceRecord
@@ -91,7 +91,7 @@ export function registerPropertyDecoration(namespace: string, decoration: Decora
 }
 
 function getOrInitializeNamespaceRegistry(namespace: string): NamespaceRegistry {
-  namespaceRegistries[namespace] = namespaceRegistries[namespace] || { name: namespace, classes: [] }
+  namespaceRegistries[namespace] = namespaceRegistries[namespace] || { name: namespace, classes: [], importedModules: [] }
 
   return namespaceRegistries[namespace]
 }
@@ -103,7 +103,7 @@ function getOrInitializeClassRegistry(namespace: string, target: ClassType): Cla
     const classRegistry: ClassRegistry = {
       name: target.name,
       decorations: [],
-      location: findModule(target)?.location,
+      location: null,
       target: target,
       accessors: [],
       methods: [],
@@ -177,12 +177,12 @@ function getOrInitializePropertyRegistry(classRegistry: ClassRegistry, propertyK
   return foundRegistry
 }
 
-function setClassRecordsLocation(namespaceRegistry: NamespaceRegistry): void {
+function setClassRecordsLocation(namespaceRegistry: NamespaceRegistry, importedModules: ModuleRegistry[]): void {
   for (let i = 0; i < namespaceRegistry.classes.length; i++) {
     const currentclassRegistry = namespaceRegistry.classes[i]
 
     if (!currentclassRegistry.location) {
-      const importedModule = findModule(currentclassRegistry.target)
+      const importedModule = findModule(currentclassRegistry.target, importedModules)
 
       if (importedModule) {
         currentclassRegistry.location = importedModule.location
@@ -191,7 +191,7 @@ function setClassRecordsLocation(namespaceRegistry: NamespaceRegistry): void {
   }
 }
 
-function findModule(target: ClassType): ModuleRegistry {
+function findModule(target: ClassType, importedModules: ModuleRegistry[]): ModuleRegistry {
   return importedModules.find((moduleRegistry: ModuleRegistry): boolean => moduleRegistry.exports === target)
 }
 

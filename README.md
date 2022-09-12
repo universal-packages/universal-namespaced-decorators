@@ -77,14 +77,14 @@ export default class ApplicationController {
 
 ## getNamespace()
 
-Get the namespaced decorators registry as a useful structured decorations object. You can optionally pass load options objects, all modules in that location will be dynamically imported triggering the decorators.
+Get the namespaced decorators registry as a useful structured decorations object. It loads a directory and import modules to trigger decorarions, get class directory location and share imported modules that may have errors.
 
 > In order to get the location of a decorated class all imported modules should have that class as a default export.
 
 ```js
 import { getNamespace } from '@universal-packages/namespaced-decorators'
 
-const namespaceRegistry = getNamespace('web', { location: './src', conventionPrefix: 'controller' })
+const namespaceRegistry = getNamespace('web', './src', 'controller')
 ```
 
 ### NamespaceRegistry
@@ -127,6 +127,8 @@ The namespace registry is structured as follow:
       The accessor name
     - **`decorations`** `Decoration[]`
       All the decorations being applied to the property in order of activation.
+- **`importedModules`** `ModuleRegisrty[]`
+  All modules imported when loading namespace, useful to know if any module may have an error.
 
 #### How does it look?
 
@@ -163,6 +165,18 @@ const namespace = {
           decorations: [{ __type: 'request-body', parser: 'json' }]
         }
       ]
+    }
+  ],
+  importedModules: [
+    {
+      export: [ApplicationController],
+      location: '/Users/david/project/src/Application.controller.ts',
+      error: null
+    },
+    {
+      export: null,
+      location: '/Users/david/project/src/Users.controller.ts',
+      error: Error('Unexpected error')
     }
   ]
 }

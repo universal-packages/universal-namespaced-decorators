@@ -7,7 +7,7 @@ import GoodClass2 from './__fixtures__/namespace2/GoodClass2'
 describe('namespaced-decorators', (): void => {
   describe('getNamesapce', (): void => {
     it('gets a registered namespace and aditionaly can import a directory of modules to trigger decorators', async (): Promise<void> => {
-      expect(await getNamespace('namespace1', { location: './tests/__fixtures__' })).toEqual({
+      expect(await getNamespace('namespace1', './tests/__fixtures__')).toEqual({
         name: 'namespace1',
         classes: [
           {
@@ -130,10 +130,11 @@ describe('namespaced-decorators', (): void => {
               { propertyKey: 'propertyB', decorations: [{ __type: 'readonly', extra: 'only' }] }
             ]
           }
-        ]
+        ],
+        importedModules: expect.any(Array)
       })
 
-      expect(await getNamespace('namespace2', { location: './tests/__fixtures__' })).toEqual({
+      expect(await getNamespace('namespace2', './tests/__fixtures__')).toEqual({
         name: 'namespace2',
         classes: [
           {
@@ -214,7 +215,8 @@ describe('namespaced-decorators', (): void => {
               { propertyKey: 'propertyB', decorations: [{ __type: 'readonly', extra: 'only' }] }
             ]
           }
-        ]
+        ],
+        importedModules: expect.any(Array)
       })
     })
   })
