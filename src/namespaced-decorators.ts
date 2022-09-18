@@ -22,9 +22,8 @@ export async function getNamespace(namespace: string, location: string, conventi
 
   const namespaceRecord = namespaceRegistries[namespace]
 
-  namespaceRecord.importedModules = importedModules
-
   if (namespaceRecord) {
+    namespaceRecord.importedModules = importedModules
     setClassRecordsLocation(namespaceRecord, importedModules)
   }
 
