@@ -1,7 +1,7 @@
 import { ClassDecorator, PropertyDecorator, AccessorDecorator, MethodDecorator, ArgumentDecorator } from '../../../src'
 
 @ClassDecorator('namespace2', { __type: 'ClassDecoratorA', extra: 'A' })
-export default class ExcelentClass2 {
+export default class ExcellentClass2 {
   @PropertyDecorator('namespace2', { __type: 'PropertyDecoratorA', extra: 'A' })
   public propertyA = 10
 
@@ -12,7 +12,7 @@ export default class ExcelentClass2 {
 
   @AccessorDecorator('namespace2', { __type: 'AccessorDecoratorA', extra: 'A' })
   public get getterA(): string {
-    return 'dommy'
+    return 'dummy'
   }
 
   @AccessorDecorator('namespace2', { __type: 'AccessorDecoratorA', extra: 'A' })

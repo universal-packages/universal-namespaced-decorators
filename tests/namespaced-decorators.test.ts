@@ -1,23 +1,23 @@
 import { getNamespace } from '../src'
-import ExcelentClass from './__fixtures__/namespace1/ExcelentClass'
+import ExcellentClass from './__fixtures__/namespace1/ExcellentClass'
 import GoodClass from './__fixtures__/namespace1/GoodClass'
-import ExcelentClass2 from './__fixtures__/namespace2/ExcelentClass2'
+import ExcellentClass2 from './__fixtures__/namespace2/ExcellentClass2'
 import GoodClass2 from './__fixtures__/namespace2/GoodClass2'
 
 describe('namespaced-decorators', (): void => {
-  describe('getNamesapce', (): void => {
-    it('gets a registered namespace and aditionaly can import a directory of modules to trigger decorators', async (): Promise<void> => {
+  describe('getNamespace', (): void => {
+    it('gets a registered namespace and additionally can import a directory of modules to trigger decorators', async (): Promise<void> => {
       expect(await getNamespace('namespace1', './tests/__fixtures__')).toEqual({
         name: 'namespace1',
         classes: [
           {
-            name: 'ExcelentClass',
+            name: 'ExcellentClass',
             decorations: [
               { __type: 'ClassDecoratorB', extra: 'B' },
               { __type: 'ClassDecoratorA', extra: 'A' }
             ],
-            location: expect.stringMatching(/__fixtures__\/namespace1\/ExcelentClass.ts/),
-            target: ExcelentClass,
+            location: expect.stringMatching(/__fixtures__\/namespace1\/ExcellentClass.ts/),
+            target: ExcellentClass,
             accessors: [
               {
                 decorations: [
@@ -138,10 +138,10 @@ describe('namespaced-decorators', (): void => {
         name: 'namespace2',
         classes: [
           {
-            name: 'ExcelentClass2',
+            name: 'ExcellentClass2',
             decorations: [{ __type: 'ClassDecoratorA', extra: 'A' }],
-            location: expect.stringMatching(/__fixtures__\/namespace2\/ExcelentClass2.ts/),
-            target: ExcelentClass2,
+            location: expect.stringMatching(/__fixtures__\/namespace2\/ExcellentClass2.ts/),
+            target: ExcellentClass2,
             accessors: [
               {
                 decorations: [{ __type: 'AccessorDecoratorA', extra: 'A' }],

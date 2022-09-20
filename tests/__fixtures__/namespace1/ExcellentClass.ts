@@ -2,7 +2,7 @@ import { ClassDecorator, PropertyDecorator, AccessorDecorator, MethodDecorator, 
 
 @ClassDecorator('namespace1', { __type: 'ClassDecoratorA', extra: 'A' })
 @ClassDecorator('namespace1', { __type: 'ClassDecoratorB', extra: 'B' })
-export default class ExcelentClass {
+export default class ExcellentClass {
   @PropertyDecorator('namespace1', { __type: 'PropertyDecoratorA', extra: 'A' })
   @PropertyDecorator('namespace1', { __type: 'PropertyDecoratorB', extra: 'B' })
   public propertyA = 10
@@ -15,7 +15,7 @@ export default class ExcelentClass {
   @AccessorDecorator('namespace1', { __type: 'AccessorDecoratorA', extra: 'A' })
   @AccessorDecorator('namespace1', { __type: 'AccessorDecoratorB', extra: 'B' })
   public get getterA(): string {
-    return 'dommy'
+    return 'dummy'
   }
 
   @AccessorDecorator('namespace1', { __type: 'AccessorDecoratorA', extra: 'A' })
