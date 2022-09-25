@@ -65,26 +65,33 @@ export default class ApplicationController {
 
   @Globals()
   get globals(): string {
-    return this.settedGlobals
+    return this.setGlobals
   }
 
   @Endpoint('get')
   async root(@Param('id') id) {
-    this.settedGlobals = (user: { name: 'David' })
+    this.setGlobals = (user: { name: 'David' })
   }
 }
 ```
 
 ## getNamespace()
 
-Get the namespaced decorators registry as a useful structured decorations object. It loads a directory and import modules to trigger decorarions, get class directory location and share imported modules that may have errors.
+Get the namespaced decorators registry as a useful structured decorations object. It can load a directory and import modules to trigger decorations, get class directory location and share imported modules that may have errors.
+
+Optionally instead of providing a location to load you can pass an array of already loaded modules, this way the registry can be filled with the class directory location.
 
 > In order to get the location of a decorated class all imported modules should have that class as a default export.
 
 ```js
+import { loadModules } from '@universal-packages/module-loader'
 import { getNamespace } from '@universal-packages/namespaced-decorators'
 
 const namespaceRegistry = getNamespace('web', './src', 'controller')
+
+// You can pass already loaded modules
+const modules = loadModules('./lib')
+const namespaceRegistry = getNamespace('web', modules)
 ```
 
 ### NamespaceRegistry
@@ -127,7 +134,7 @@ The namespace registry is structured as follow:
       The accessor name
     - **`decorations`** `Decoration[]`
       All the decorations being applied to the property in order of activation.
-- **`importedModules`** `ModuleRegisrty[]`
+- **`importedModules`** `ModuleRegistry[]`
   All modules imported when loading namespace, useful to know if any module may have an error.
 
 #### How does it look?
