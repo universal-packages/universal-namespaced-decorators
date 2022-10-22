@@ -1,9 +1,9 @@
 import { ModuleRegistry } from '@universal-packages/module-loader'
 
 export type ClassType<T = any> = { new (...args: any[]): T; [key: string]: any }
-export type AccessorDecoratorFunction = (target: any, propertyKey: string, desciptor: PropertyDescriptor) => PropertyDescriptor
+export type AccessorDecoratorFunction = (target: any, propertyKey: string, descriptor: PropertyDescriptor) => PropertyDescriptor
 export type ClassDecoratorFunction = (constructor: ClassType) => void
-export type MethodDecoratorFunction = (target: any, propertyKey: string, desciptor: PropertyDescriptor) => PropertyDescriptor
+export type MethodDecoratorFunction = (target: any, propertyKey: string, descriptor: PropertyDescriptor) => PropertyDescriptor
 export type ParameterDecoratorFunction = (target: any, propertyKey: string, index: number) => void
 export type PropertyDecoratorFunction = (target: any, propertyKey: string) => void
 export type DescriptorGenerator = (propertyKey: string) => PropertyDescriptor
