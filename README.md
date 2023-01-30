@@ -31,7 +31,7 @@ All decorators take a namespace as first argument to be grouped accordingly, and
 - **`PropertyDecorator`**
   Registers a property decoration, it also takes a third argument, a `DescriptorGenerator` which is a function that returns a descriptor to describe the property, useful to make properties read only.
 
-### Usage
+### Example usage
 
 ```js
 import { ClassDecorator, PropertyDecorator, AccessorDecorator, MethodDecorator, ArgumentDecorator } from '@universal-packages/namespaced-decorators'
@@ -75,7 +75,11 @@ export default class ApplicationController {
 }
 ```
 
-## getNamespace()
+## Global methods
+
+##### **`getNamespace(namespace: string, location: string, [conventionPrefix: string])`**
+
+##### **`getNamespace(namespace: string, sharedModules: ModuleRegistry[], [conventionPrefix: string])`**
 
 Get the namespaced decorators registry as a useful structured decorations object. It can load a directory and import modules to trigger decorations, get class directory location and share imported modules that may have errors.
 
@@ -94,7 +98,7 @@ const modules = loadModules('./lib')
 const namespaceRegistry = getNamespace('web', modules)
 ```
 
-### NamespaceRegistry
+#### NamespaceRegistry
 
 The namespace registry is structured as follow:
 
