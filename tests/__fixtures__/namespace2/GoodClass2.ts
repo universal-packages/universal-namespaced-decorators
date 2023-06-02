@@ -1,4 +1,4 @@
-import { ClassDecorator, PropertyDecorator, AccessorDecorator, MethodDecorator, ArgumentDecorator } from '../../../src'
+import { AccessorDecorator, ArgumentDecorator, ClassDecorator, MethodDecorator, PropertyDecorator } from '../../../src'
 
 @ClassDecorator('namespace2', { __type: 'ClassDecoratorA', extra: 'A' })
 export default class GoodClass2 {

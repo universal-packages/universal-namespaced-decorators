@@ -1,18 +1,19 @@
-import { loadModules, ModuleRegistry } from '@universal-packages/module-loader'
+import { ModuleRegistry, loadModules } from '@universal-packages/module-loader'
+
 import {
-  ClassType,
-  ClassDecoratorFunction,
-  PropertyDecoratorFunction,
-  Decoration,
-  MethodDecoratorFunction,
-  ParameterDecoratorFunction,
-  DescriptorGenerator,
-  NamespaceRegistry,
-  ClassRegistry,
   AccessorRegistry,
+  ArgumentRegistry,
+  ClassDecoratorFunction,
+  ClassRegistry,
+  ClassType,
+  Decoration,
+  DescriptorGenerator,
+  MethodDecoratorFunction,
   MethodRegistry,
-  PropertyRegistry,
-  ArgumentRegistry
+  NamespaceRegistry,
+  ParameterDecoratorFunction,
+  PropertyDecoratorFunction,
+  PropertyRegistry
 } from './namespaced-decorators.types'
 
 const namespaceRegistries: { [name: string]: NamespaceRegistry } = {}

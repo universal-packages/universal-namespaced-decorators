@@ -1,4 +1,4 @@
-import { registerAccessorDecoration, registerClassDecoration, registerMethodDecoration, registerArgumentDecoration, registerPropertyDecoration } from './namespaced-decorators'
+import { registerAccessorDecoration, registerArgumentDecoration, registerClassDecoration, registerMethodDecoration, registerPropertyDecoration } from './namespaced-decorators'
 import {
   ClassDecoratorFunction,
   Decoration,

@@ -1,4 +1,5 @@
 import { loadModules } from '@universal-packages/module-loader'
+
 import { getNamespace } from '../src'
 import ExcellentClass from './__fixtures__/namespace1/ExcellentClass'
 import GoodClass from './__fixtures__/namespace1/GoodClass'
